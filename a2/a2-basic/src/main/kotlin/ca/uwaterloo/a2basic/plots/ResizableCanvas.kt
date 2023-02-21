@@ -25,4 +25,8 @@ open class ResizableCanvas : Canvas() {
         this.width = width
         this.height = height
     }
+
+    fun clearCanvas() {
+        this.graphicsContext2D.clearRect(0.0, 0.0, width, height)
+    }
 }

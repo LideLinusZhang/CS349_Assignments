@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.model
 
+import ca.uwaterloo.a2basic.model.enums.CourseType
 import ca.uwaterloo.a2basic.model.enums.Term
 import ca.uwaterloo.a2basic.view.CourseHBox
 import ca.uwaterloo.a2basic.view.IView
@@ -14,6 +15,7 @@ object CourseList {
 
     val courses: List<Course> get() = coursesObservableList.map { it.value }
     val coursesByTerm: Map<Term, List<Course>> get() = courses.groupBy { it.termProperty.value }
+    val coursesByType: Map<CourseType, List<Course>> get() = courses.groupBy { it.type }
     val courseHBoxes: List<CourseHBox> get() = sortedCoursesProperty.map { it.courseHBox }
     val courseAverage: Double get() = courses.mapNotNull { it.scoreProperty.value }.average()
     val courseCount: Int get() = courses.count()

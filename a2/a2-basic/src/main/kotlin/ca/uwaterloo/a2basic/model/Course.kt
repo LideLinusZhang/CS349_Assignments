@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.model
 
+import ca.uwaterloo.a2basic.model.enums.CourseType
 import ca.uwaterloo.a2basic.model.enums.Term
 import javafx.beans.property.SimpleObjectProperty
 
@@ -16,15 +17,22 @@ class Course(val code: String, score: Int?, term: Term) {
         }
     }
 
+    private val isMathCourse: Boolean
+        get() = code.startsWith("MATH", true) ||
+                code.startsWith("CO", true) ||
+                code.startsWith("STAT", true)
+    private val isCSCourse: Boolean get() = code.startsWith("CS", true)
+
     val uniqueId = getUniqueId()
     val scoreProperty = SimpleObjectProperty<Int?>(score)
     val termProperty = SimpleObjectProperty(term)
 
-    val isFailed: Boolean get() = scoreProperty.value != null && scoreProperty.value!! < 50
-    val isMathCourse: Boolean
-        get() = code.startsWith("MATH", true) ||
-                code.startsWith("CO", true) ||
-                code.startsWith("STAT", true)
-
-    val isCSCourse: Boolean get() = code.startsWith("CS", true)
+    val isWD: Boolean get() = scoreProperty.value == null
+    val isFailed: Boolean get() = !isWD && scoreProperty.value!! < 50
+    val type: CourseType
+        get() {
+            return if (isCSCourse) CourseType.CS
+            else if (isMathCourse) CourseType.Math
+            else CourseType.Other
+        }
 }

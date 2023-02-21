@@ -4,29 +4,16 @@ import javafx.scene.paint.Color
 
 abstract class DotPlot<Tx, Ty>(
     xAxisElements: Array<Tx>, yAxisElements: Array<Ty>,
-    showXAxis: Boolean = true,
-    showYAxis: Boolean = true,
-
-    showHorizontalGridLine: Boolean = true,
-    showVerticalGridLine: Boolean = true,
-
-    xStartAtOrigin: Boolean = false,
-    yStartAtOrigin: Boolean = true,
-
-    margin: Double = 40.0,
-
-    protected val dotRadius: Double = 5.0,
-    private val dotCircumferenceThickness: Double = 1.5
+    showXAxis: Boolean, showYAxis: Boolean,
+    showHorizontalGridLine: Boolean, showVerticalGridLine: Boolean,
+    xStartAtOrigin: Boolean, yStartAtOrigin: Boolean,
+    margin: Double, protected val dotRadius: Double, private val dotCircumferenceThickness: Double
 ) :
     XAndYAxes<Tx, Ty>(
-        xAxisElements,
-        yAxisElements,
-        showXAxis,
-        showYAxis,
-        showHorizontalGridLine,
-        showVerticalGridLine,
-        xStartAtOrigin,
-        yStartAtOrigin,
+        xAxisElements, yAxisElements,
+        showXAxis, showYAxis,
+        showHorizontalGridLine, showVerticalGridLine,
+        xStartAtOrigin, yStartAtOrigin,
         margin
     ) {
     private val filledDots = mutableMapOf<Pair<Tx, Ty>, Color>()
@@ -64,17 +51,15 @@ abstract class DotPlot<Tx, Ty>(
             val exists = this.containsKey(coordinate)
             val colorChanged = exists && this[coordinate] != color
 
-            if (!exists || colorChanged) {
+            if (!exists || colorChanged)
                 this[coordinate] = color
-                paintDataPoint(xCoordinate, yCoordinate, color)
-            }
         }
     }
 
-    fun clearAllPoints() {
+    override fun clear() {
+        super.clear()
         filledDots.clear()
         hollowDots.clear()
-        super.draw()
     }
 
     override fun draw() {

@@ -12,8 +12,8 @@ abstract class XAndYAxes<Tx, Ty>(
     xAxisElements: Array<Tx>,
     yAxisElements: Array<Ty>,
 
-    private val showXAxis: Boolean,
-    private val showYAxis: Boolean,
+    private val showXAxisLine: Boolean,
+    private val showYAxisLine: Boolean,
 
     private val showHorizontalGridLine: Boolean,
     private val showVerticalGridLine: Boolean,
@@ -45,22 +45,20 @@ abstract class XAndYAxes<Tx, Ty>(
                 Bindings.add(yAxisElementsProperty.sizeProperty(), 1)
         )
 
-    protected val sizeProperty: DoubleBinding =
+    private val sizeProperty: DoubleBinding =
         Bindings.createDoubleBinding({ width * height }, widthProperty(), heightProperty())
 
     init {
         yAxisElements.reverse()
-        sizeProperty.addListener { _, _, _ -> this.draw() }
+        sizeProperty.addListener { _, _, _ -> clearCanvas(); this.draw() }
     }
 
     protected open fun setXAxisElements(xAxisElements: Array<Tx>) {
         xAxisElementsProperty.setAll(xAxisElements.toMutableList())
-        this.draw()
     }
 
     protected open fun setYAxisElements(yAxisElements: Array<Ty>) {
         yAxisElementsProperty.setAll(yAxisElements.toMutableList())
-        this.draw()
     }
 
     protected open fun getCanvasXCoordinate(xCoordinate: Tx): Double {
@@ -75,7 +73,8 @@ abstract class XAndYAxes<Tx, Ty>(
         graphicsContext2D.apply {
             stroke = Color.BLACK
             fill = Color.BLACK
-            strokeLine(margin, height - margin, width - margin, height - margin)
+            if (showXAxisLine)
+                strokeLine(margin, height - margin, width - margin, height - margin)
 
             textAlign = TextAlignment.CENTER
             textBaseline = VPos.TOP
@@ -89,7 +88,8 @@ abstract class XAndYAxes<Tx, Ty>(
         graphicsContext2D.apply {
             stroke = Color.BLACK
             fill = Color.BLACK
-            strokeLine(margin, margin, margin, height - margin)
+            if (showYAxisLine)
+                strokeLine(margin, margin, margin, height - margin)
 
             textAlign = TextAlignment.RIGHT
             textBaseline = VPos.BASELINE
@@ -119,18 +119,17 @@ abstract class XAndYAxes<Tx, Ty>(
         }
     }
 
+    open fun clear() = clearCanvas()
+
     open fun draw() {
         graphicsContext2D.apply {
-            clearRect(0.0, 0.0, width, height)
-
             if (showVerticalGridLine)
                 paintVerticalGridLines()
             if (showHorizontalGridLine)
                 paintHorizontalGridLines()
-            if (showXAxis)
-                paintXAxis()
-            if (showYAxis)
-                paintYAxis()
+
+            paintXAxis()
+            paintYAxis()
         }
     }
 }
