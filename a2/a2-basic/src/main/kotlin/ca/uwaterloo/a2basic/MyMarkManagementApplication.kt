@@ -1,9 +1,9 @@
 package ca.uwaterloo.a2basic
 
 import ca.uwaterloo.a2basic.controller.AddCourseHBox
-import ca.uwaterloo.a2basic.view.AveragePlot
 import ca.uwaterloo.a2basic.view.CourseListScrollPane
 import ca.uwaterloo.a2basic.view.CourseStatsHBox
+import ca.uwaterloo.a2basic.view.CourseStatsTablePane
 import javafx.application.Application
 import javafx.geometry.Orientation
 import javafx.scene.Scene
@@ -11,7 +11,6 @@ import javafx.scene.control.PopupControl.USE_PREF_SIZE
 import javafx.scene.control.Separator
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
-import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
@@ -31,18 +30,15 @@ class MyMarkVisualizationApplication : Application() {
             }
             VBox.setVgrow(CourseListScrollPane, Priority.ALWAYS)
         }
-        val plotStackPane = StackPane(AveragePlot).apply {
-            maxWidth = Double.MAX_VALUE
-            maxHeight = Double.MAX_VALUE
-        }
-        val hBox = HBox(coursesVBox, plotStackPane).apply {
+
+        val hBox = HBox(coursesVBox, CourseStatsTablePane).apply {
             maxWidth = Double.MAX_VALUE
             minHeight = USE_PREF_SIZE
             maxHeight = Double.MAX_VALUE
             HBox.setHgrow(coursesVBox, Priority.NEVER)
-            HBox.setHgrow(plotStackPane, Priority.ALWAYS)
+            HBox.setHgrow(CourseStatsTablePane, Priority.ALWAYS)
         }
-        val vBox = VBox(hBox,Separator(Orientation.VERTICAL), CourseStatsHBox).apply {
+        val vBox = VBox(hBox, Separator(Orientation.VERTICAL), CourseStatsHBox).apply {
             maxWidth = Double.MAX_VALUE
             minWidth = USE_PREF_SIZE
             maxHeight = Double.MAX_VALUE

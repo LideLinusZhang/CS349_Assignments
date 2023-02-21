@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.model
 
+import ca.uwaterloo.a2basic.model.enums.Term
 import ca.uwaterloo.a2basic.view.CourseHBox
 import ca.uwaterloo.a2basic.view.IView
 import javafx.beans.property.ReadOnlyListWrapper
@@ -12,6 +13,7 @@ object CourseList {
     )
 
     val courses: List<Course> get() = coursesObservableList.map { it.value }
+    val coursesByTerm: Map<Term, List<Course>> get() = courses.groupBy { it.termProperty.value }
     val courseHBoxes: List<CourseHBox> get() = sortedCoursesProperty.map { it.courseHBox }
     val courseAverage: Double get() = courses.mapNotNull { it.scoreProperty.value }.average()
     val courseCount: Int get() = courses.count()

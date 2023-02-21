@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.model
 
+import ca.uwaterloo.a2basic.model.enums.Term
 import ca.uwaterloo.a2basic.view.CourseHBox
 import ca.uwaterloo.a2basic.view.IView
 import javafx.beans.binding.ObjectBinding

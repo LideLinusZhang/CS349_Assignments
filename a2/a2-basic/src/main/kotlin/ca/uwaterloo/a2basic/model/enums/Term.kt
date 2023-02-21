@@ -1,4 +1,4 @@
-package ca.uwaterloo.a2basic.model
+package ca.uwaterloo.a2basic.model.enums
 
 enum class Term {
     F20,

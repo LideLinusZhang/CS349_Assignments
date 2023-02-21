@@ -1,10 +1,11 @@
 package ca.uwaterloo.a2basic.view
 
-import ca.uwaterloo.a2basic.controller.CodeTextField
-import ca.uwaterloo.a2basic.controller.ScoreTextField
-import ca.uwaterloo.a2basic.controller.TermChoiceBox
+import ca.uwaterloo.a2basic.controller.widgets.CodeTextField
+import ca.uwaterloo.a2basic.controller.widgets.ScoreTextField
+import ca.uwaterloo.a2basic.controller.widgets.TermChoiceBox
 import ca.uwaterloo.a2basic.model.Course
 import ca.uwaterloo.a2basic.model.CourseList
+import ca.uwaterloo.a2basic.view.extensions.toColor
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos

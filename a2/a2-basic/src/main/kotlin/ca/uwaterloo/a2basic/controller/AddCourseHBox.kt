@@ -1,5 +1,8 @@
 package ca.uwaterloo.a2basic.controller
 
+import ca.uwaterloo.a2basic.controller.widgets.CodeTextField
+import ca.uwaterloo.a2basic.controller.widgets.ScoreTextField
+import ca.uwaterloo.a2basic.controller.widgets.TermChoiceBox
 import ca.uwaterloo.a2basic.model.CourseList
 import javafx.event.EventHandler
 import javafx.geometry.Insets

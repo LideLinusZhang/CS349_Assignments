@@ -1,4 +1,4 @@
-package ca.uwaterloo.a2basic.controller
+package ca.uwaterloo.a2basic.controller.widgets
 
 import javafx.scene.control.TextField
 

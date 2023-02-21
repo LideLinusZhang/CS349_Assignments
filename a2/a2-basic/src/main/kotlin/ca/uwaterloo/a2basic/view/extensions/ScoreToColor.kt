@@ -1,4 +1,4 @@
-package ca.uwaterloo.a2basic.view
+package ca.uwaterloo.a2basic.view.extensions
 
 import javafx.scene.paint.Color
 

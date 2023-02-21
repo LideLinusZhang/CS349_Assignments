@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.model
 
+import ca.uwaterloo.a2basic.model.enums.Term
 import javafx.beans.property.SimpleObjectProperty
 
 class Course(val code: String, score: Int?, term: Term) {

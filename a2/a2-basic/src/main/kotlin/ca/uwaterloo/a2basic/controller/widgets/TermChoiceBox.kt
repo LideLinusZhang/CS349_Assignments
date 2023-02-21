@@ -1,6 +1,6 @@
-package ca.uwaterloo.a2basic.controller
+package ca.uwaterloo.a2basic.controller.widgets
 
-import ca.uwaterloo.a2basic.model.Term
+import ca.uwaterloo.a2basic.model.enums.Term
 import javafx.scene.control.ChoiceBox
 
 class TermChoiceBox : ChoiceBox<Term>() {
