@@ -1,10 +1,12 @@
 package ca.uwaterloo.a2basic.model
 
 import javafx.beans.property.SimpleObjectProperty
-import javafx.scene.paint.Color
 
 class Course(val code: String, score: Int?, term: Term) {
     companion object {
+        const val scoreMax: Double = 100.0
+        const val scoreMin: Double = 0.0
+
         private var nextUniqueId: Int = 0
         private fun getUniqueId(): Int {
             val uniqueId = nextUniqueId
@@ -24,14 +26,4 @@ class Course(val code: String, score: Int?, term: Term) {
                 code.startsWith("STAT", true)
 
     val isCSCourse: Boolean get() = code.startsWith("CS", true)
-
-    fun getColor(): Color =
-        when (scoreProperty.value) {
-            null -> Color.DARKSLATEGRAY
-            in 0..49 -> Color.LIGHTCORAL
-            in 50..59 -> Color.LIGHTBLUE
-            in 60..90 -> Color.LIGHTGREEN
-            in 91..95 -> Color.SILVER
-            else -> Color.GOLD
-        }
 }

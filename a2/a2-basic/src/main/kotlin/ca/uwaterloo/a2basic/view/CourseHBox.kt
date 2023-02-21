@@ -56,7 +56,12 @@ class CourseHBox(private val course: Course) : HBox(), IView {
     }
 
     private fun setBackgroundColor() {
-        background = Background(BackgroundFill(course.getColor(), CornerRadii(10.0), Insets(2.5)))
+        background = Background(
+            BackgroundFill(
+                course.scoreProperty.value.toColor(),
+                CornerRadii(10.0), Insets(2.5)
+            )
+        )
     }
 
     private fun commitChanges() {

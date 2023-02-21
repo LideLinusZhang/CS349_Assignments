@@ -9,11 +9,11 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 
 object CourseStatsHBox : HBox(), IView {
-    private val averageLabel = StatsLabel()
-    private val countLabel = StatsLabel()
-    private val failedCountLabel = StatsLabel()
+    private val averageLabel = Label()
+    private val countLabel = Label()
+    private val failedCountLabel = Label()
     private val wdSeparator = Separator(Orientation.VERTICAL)
-    private val wdCountLabel = StatsLabel()
+    private val wdCountLabel = Label()
 
     init {
         maxWidth = Double.MAX_VALUE
