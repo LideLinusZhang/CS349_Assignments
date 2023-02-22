@@ -7,7 +7,7 @@ abstract class Histogram<Tx, Ty>(
     showXAxis: Boolean, showYAxis: Boolean,
     showHorizontalGridLine: Boolean, showVerticalGridLine: Boolean,
     xStartAtOrigin: Boolean, yStartAtOrigin: Boolean,
-    margin: Double, private val barWidth: Double
+    margin: Double
 ) : XAndYAxes<Tx, Ty>(
     xAxisElements, yAxisElements,
     showXAxis, showYAxis,
@@ -17,6 +17,7 @@ abstract class Histogram<Tx, Ty>(
 ) {
     private val horizontalBars = mutableMapOf<Triple<Tx, Ty, Int>, Color>()
     private val verticalBars = mutableMapOf<Triple<Tx, Ty, Int>, Color>()
+    private val barWidth: Double get() = yStepProperty.value.toDouble() / 2.0
 
     private fun paintHorizontalBar(xCoordinate: Tx, yCoordinate: Ty, color: Color) {
         val xCanvasCoordinate = getCanvasXCoordinate(xCoordinate)

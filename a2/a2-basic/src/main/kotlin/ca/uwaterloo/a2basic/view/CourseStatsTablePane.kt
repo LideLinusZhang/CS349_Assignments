@@ -15,6 +15,8 @@ object CourseStatsTablePane : TabPane() {
         StackPane(TermAveragePlot.apply { CourseList.registerView(this) }).apply {
             maxWidth = Double.MAX_VALUE
             maxHeight = Double.MAX_VALUE
+            minWidth = 1.0
+            minHeight = 1.0
             alignment = Pos.CENTER
         }
 
@@ -22,6 +24,8 @@ object CourseStatsTablePane : TabPane() {
         StackPane(DegreeProgressPlot.apply { CourseList.registerView(this) }).apply {
             maxWidth = Double.MAX_VALUE
             maxHeight = Double.MAX_VALUE
+            minWidth = 1.0
+            minHeight = 1.0
             alignment = Pos.CENTER
         }
 
@@ -29,6 +33,8 @@ object CourseStatsTablePane : TabPane() {
         StackPane(IncrementalTermAveragePlot.apply { CourseList.registerView(this) }).apply {
             maxWidth = Double.MAX_VALUE
             maxHeight = Double.MAX_VALUE
+            minWidth = 1.0
+            minHeight = 1.0
             alignment = Pos.CENTER
         }
 
@@ -45,5 +51,7 @@ object CourseStatsTablePane : TabPane() {
 
         maxWidth = Double.MAX_VALUE
         maxHeight = Double.MAX_VALUE
+        minWidth = 1.0
+        minHeight = USE_COMPUTED_SIZE
     }
 }

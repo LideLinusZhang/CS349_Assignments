@@ -18,6 +18,7 @@ object CourseStatsHBox : HBox(), IView {
     init {
         maxWidth = Double.MAX_VALUE
         minWidth = USE_PREF_SIZE
+        minHeight = USE_PREF_SIZE
         children.addAll(
             averageLabel,
             Separator(Orientation.VERTICAL),

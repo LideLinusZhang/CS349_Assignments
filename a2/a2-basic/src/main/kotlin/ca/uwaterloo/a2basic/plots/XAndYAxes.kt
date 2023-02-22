@@ -28,7 +28,7 @@ abstract class XAndYAxes<Tx, Ty>(
     private val yAxisElementsProperty =
         SimpleListProperty(FXCollections.observableList(yAxisElements.reversed().toMutableList()))
 
-    private val xStepProperty =
+    protected val xStepProperty =
         Bindings.divide(
             Bindings.subtract(widthProperty(), 2.0 * margin),
             if (xStartAtOrigin)
@@ -36,7 +36,7 @@ abstract class XAndYAxes<Tx, Ty>(
             else
                 Bindings.add(xAxisElementsProperty.sizeProperty(), 1)
         )
-    private val yStepProperty =
+    protected val yStepProperty =
         Bindings.divide(
             Bindings.subtract(heightProperty(), 2.0 * margin),
             if (yStartAtOrigin)

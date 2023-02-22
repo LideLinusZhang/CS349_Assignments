@@ -38,7 +38,6 @@ class CourseHBox(private val course: Course) : HBox(), IView {
     }
 
     init {
-        maxWidth = Double.MAX_VALUE
         minWidth = USE_PREF_SIZE
         children.addAll(
             codeTextField,

@@ -5,6 +5,7 @@ import ca.uwaterloo.a2basic.model.enums.CourseType
 import ca.uwaterloo.a2basic.plots.PieChart
 import ca.uwaterloo.a2basic.view.IView
 import ca.uwaterloo.a2basic.view.extensions.toColor
+import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.CheckBox
 import javafx.scene.layout.Priority
@@ -27,6 +28,7 @@ object OutcomePieChart : VBox(), IView {
         children.addAll(pieChart, includingMissingCheckBox)
         setVgrow(includingMissingCheckBox, Priority.NEVER)
         setVgrow(pieChart, Priority.ALWAYS)
+        setMargin(includingMissingCheckBox, Insets(5.0,0.0,5.0,0.0))
         CourseList.registerView(this)
     }
 

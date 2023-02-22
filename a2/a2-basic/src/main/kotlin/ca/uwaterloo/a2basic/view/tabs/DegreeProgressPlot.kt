@@ -12,7 +12,7 @@ object DegreeProgressPlot : Histogram<Double, CourseType>(
     showXAxis = false, showYAxis = true,
     showVerticalGridLine = true, showHorizontalGridLine = false,
     xStartAtOrigin = true, yStartAtOrigin = false,
-    margin = 40.0, barWidth = 15.0
+    margin = 40.0
 ), IView {
     init {
         draw()

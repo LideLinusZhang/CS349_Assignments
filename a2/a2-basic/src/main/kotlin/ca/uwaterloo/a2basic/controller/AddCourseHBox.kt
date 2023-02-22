@@ -30,8 +30,11 @@ object AddCourseHBox : HBox() {
         }
         maxWidth = Double.MAX_VALUE
         minWidth = USE_PREF_SIZE
+        minHeight = USE_PREF_SIZE
         padding = Insets(0.0, 10.0, 0.0, 10.0)
-        setMargin(addCourseButton, Insets(10.0, 80.0, 10.0, 0.0))
+        setMargin(codeTextField, Insets(10.0, 10.0, 10.0, 6.6) )
+        setMargin(termChoiceBox, Insets(10.0, 90.0, 10.0, 0.0) )
+        setMargin(addCourseButton, Insets(10.0, 6.6, 10.0, 0.0))
     }
 
     private fun addCourse() {
