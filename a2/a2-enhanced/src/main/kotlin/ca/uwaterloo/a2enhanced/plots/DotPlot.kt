@@ -31,6 +31,19 @@ abstract class DotPlot<Tx, Ty>(
         hollowDots.clear()
     }
 
+    private fun paintLine(start: Pair<Tx, Ty>, end: Pair<Tx, Ty>) {
+        val xCanvasStart = getCanvasXCoordinate(start.first)
+        val yCanvasStart = getCanvasYCoordinate(start.second)
+        val xCanvasEnd = getCanvasXCoordinate(end.first)
+        val yCanvasEnd = getCanvasYCoordinate(end.second)
+
+        graphicsContext2D.apply {
+            stroke = Color.BLACK
+            strokeLine(xCanvasStart, yCanvasStart, xCanvasEnd, yCanvasEnd)
+            lineDashes
+        }
+    }
+
     private fun paintDataPoint(xCoordinate: Tx, yCoordinate: Ty, color: Color, fillPoint: Boolean = true) {
         val xCanvasCoordinate = getCanvasXCoordinate(xCoordinate)
         val yCanvasCoordinate = getCanvasYCoordinate(yCoordinate)
@@ -64,6 +77,13 @@ abstract class DotPlot<Tx, Ty>(
 
     override fun draw() {
         super.draw()
+
+        var previous: Pair<Tx, Ty>? = null
+        filledDots.keys.forEach {
+            if (previous != null) paintLine(previous!!, it)
+            previous = it
+        }
+
         filledDots.forEach { (coordinate, color) -> paintDataPoint(coordinate.first, coordinate.second, color) }
         hollowDots.forEach { (coordinate, color) -> paintDataPoint(coordinate.first, coordinate.second, color, false) }
     }
