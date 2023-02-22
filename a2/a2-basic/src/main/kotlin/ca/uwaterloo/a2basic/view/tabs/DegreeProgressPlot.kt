@@ -11,8 +11,7 @@ object DegreeProgressPlot : Histogram<Double, CourseType>(
     CourseType.values().reversedArray(),
     showXAxis = false, showYAxis = true,
     showVerticalGridLine = true, showHorizontalGridLine = false,
-    xStartAtOrigin = true, yStartAtOrigin = false,
-    margin = 40.0
+    xStartAtOrigin = true, yStartAtOrigin = false, margin = 40.0
 ), IView {
     init {
         draw()
@@ -38,11 +37,8 @@ object DegreeProgressPlot : Histogram<Double, CourseType>(
 
         CourseType.values().forEach {
             val passed: Int =
-                if (it == CourseType.All) {
-                    CourseList.courses
-                } else {
-                    CourseList.coursesByType[it]
-                }?.count { course -> !(course.isFailed || course.isWD) } ?: 0
+                (if (it == CourseType.All) CourseList.courses else CourseList.coursesByType[it])
+                    ?.count { course -> !(course.isFailed || course.isWD) } ?: 0
 
             addBar(passed * 0.5, it, it.toColor(), 1)
         }

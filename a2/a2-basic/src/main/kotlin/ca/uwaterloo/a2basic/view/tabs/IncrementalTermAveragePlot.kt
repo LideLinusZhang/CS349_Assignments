@@ -13,7 +13,7 @@ object IncrementalTermAveragePlot : ErrorBarDotPlot<Term, Double>(
     showXAxis = true, showYAxis = true,
     showHorizontalGridLine = true, showVerticalGridLine = true,
     xStartAtOrigin = false, yStartAtOrigin = true,
-    margin = 40.0, dotRadius = 5.0, dotCircumferenceThickness = 1.5, errorBarWidth = 15.0
+    margin = 40.0, dotRadius = 5.0, dotCircumferenceThickness = 1.5, errorBarWidth = 12.5
 ), IView {
     init {
         draw()

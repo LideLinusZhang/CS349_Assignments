@@ -30,7 +30,7 @@ object CourseListScrollPane : ScrollPane(), IView {
         CourseList.courseHBoxes.forEach {
             coursesVBox.children.add(it)
             VBox.setVgrow(it, Priority.NEVER)
-            VBox.setMargin(it, Insets(0.0,5.0,0.0,5.0))
+            VBox.setMargin(it, Insets(0.0, 5.0, 0.0, 5.0))
         }
     }
 }

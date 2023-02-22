@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
 class MyMarkVisualizationApplication : Application() {
+    private val windowWidth = 900.0
+    private val windowHeight = 450.0
+
     override fun start(stage: Stage) {
         val coursesVBox = VBox(
             AddCourseHBox,
@@ -32,6 +35,7 @@ class MyMarkVisualizationApplication : Application() {
             children.forEach { HBox.setHgrow(it, Priority.NEVER) }
             HBox.setHgrow(CourseStatsTablePane, Priority.ALWAYS)
         }
+
         val vBox = VBox(
             hBox, Separator(Orientation.HORIZONTAL),
             CourseStatsHBox
@@ -42,12 +46,12 @@ class MyMarkVisualizationApplication : Application() {
             VBox.setVgrow(hBox, Priority.ALWAYS)
         }
 
-        val scene = Scene(vBox, 900.0, 450.0)
+        val scene = Scene(vBox, windowWidth, windowHeight)
         stage.apply {
             title = "CS349 - A2 My Mark Visualization - l625zhan"
             this.scene = scene
-            width = 900.0
-            height = 450.0
+            width = windowWidth
+            height = windowHeight
             show()
         }
     }

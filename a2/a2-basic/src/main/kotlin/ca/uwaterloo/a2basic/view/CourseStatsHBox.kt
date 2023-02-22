@@ -40,7 +40,7 @@ object CourseStatsHBox : HBox(), IView {
     override fun update() {
         with(CourseList) {
             averageLabel.text =
-                "Course Average: ${String.format("%.2f", if (courseAverage.isNaN()) 0.0 else courseAverage)}"
+                courseAverage.let { "Course Average: ${String.format("%.2f", if (it.isNaN()) 0.0 else it)}" }
             countLabel.text = "Courses Taken: $courseCount"
             failedCountLabel.text = "Courses Failed: $courseFailedCount"
             wdCountLabel.text = "Courses WD'ed: $courseWDCount"

@@ -8,6 +8,7 @@ class Course(val code: String, score: Int?, term: Term) {
     companion object {
         const val scoreMax: Double = 100.0
         const val scoreMin: Double = 0.0
+        const val creditPerCourse: Double = 0.5
 
         private var nextUniqueId: Int = 0
         private fun getUniqueId(): Int {

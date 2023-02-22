@@ -1,5 +1,6 @@
 package ca.uwaterloo.a2basic.view.tabs
 
+import ca.uwaterloo.a2basic.model.Course
 import ca.uwaterloo.a2basic.model.CourseList
 import ca.uwaterloo.a2basic.model.enums.CourseType
 import ca.uwaterloo.a2basic.plots.PieChart
@@ -28,7 +29,7 @@ object OutcomePieChart : VBox(), IView {
         children.addAll(pieChart, includingMissingCheckBox)
         setVgrow(includingMissingCheckBox, Priority.NEVER)
         setVgrow(pieChart, Priority.ALWAYS)
-        setMargin(includingMissingCheckBox, Insets(5.0,0.0,5.0,0.0))
+        setMargin(includingMissingCheckBox, Insets(5.0, 0.0, 5.0, 0.0))
         CourseList.registerView(this)
     }
 
@@ -40,7 +41,8 @@ object OutcomePieChart : VBox(), IView {
         }
 
         if (includingMissingCheckBox.isSelected) {
-            val coursesMissing = CourseType.All.creditRequired() * 2 - CourseList.courses.size
+            val coursesMissing =
+                (CourseType.All.creditRequired() / Course.creditPerCourse).toInt() - CourseList.courses.size
             println("Course Missing = $coursesMissing")
             for (i in 0 until coursesMissing) {
                 pieChart.addElement(Color.DIMGRAY, "")
