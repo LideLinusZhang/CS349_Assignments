@@ -14,8 +14,9 @@ object CourseListScrollPane : ScrollPane(), IView {
     init {
         maxHeight = Double.MAX_VALUE
         maxWidth = Double.MAX_VALUE
+        isFitToHeight = false
         isFitToWidth = true
-        hbarPolicy = ScrollBarPolicy.AS_NEEDED
+        hbarPolicy = ScrollBarPolicy.NEVER
         vbarPolicy = ScrollBarPolicy.AS_NEEDED
         content = coursesVBox
 

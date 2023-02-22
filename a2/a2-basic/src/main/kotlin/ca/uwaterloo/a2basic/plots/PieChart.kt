@@ -41,13 +41,14 @@ open class PieChart : StackPane() {
             prefWidth = this@PieChart.width
             prefHeight = this@PieChart.height
             textAlignment = TextAlignment.LEFT
+            alignment = Pos.TOP_LEFT
         }
 
-        val radius = min(width, height) / 2.0
+        val radius = min(width, height) / 2.0 * 0.95
 
         var startAngle = 0.0
         elements.groupBy { it.first }.forEach { (color, descriptions) ->
-            val angle = 360.0 * (descriptions.size / elements.size.toDouble())
+            val angle = 360.0 * (descriptions.size.toDouble() / elements.size.toDouble())
             val combinedDescription = StringBuilder().apply {
                 descriptions.forEach { this.appendLine(it.second) }
             }.toString()
@@ -63,5 +64,6 @@ open class PieChart : StackPane() {
         }
 
         children.addAll(details, pie)
+        setAlignment(details, Pos.TOP_LEFT)
     }
 }

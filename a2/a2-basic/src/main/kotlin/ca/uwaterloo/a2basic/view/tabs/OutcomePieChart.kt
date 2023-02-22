@@ -39,6 +39,7 @@ object OutcomePieChart : VBox(), IView {
 
         if (includingMissingCheckBox.isSelected) {
             val coursesMissing = CourseType.All.creditRequired() * 2 - CourseList.courses.size
+            println("Course Missing = $coursesMissing")
             for (i in 0 until coursesMissing) {
                 pieChart.addElement(Color.DIMGRAY, "")
             }
