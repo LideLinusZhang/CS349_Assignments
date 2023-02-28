@@ -9,5 +9,5 @@ Linus Zhang (l625zhan 20870946)
 
 ## Enhancement
 I added the following enhancement:
-* Lines to “Average per Term” or “Rolling Average”
+* Lines to “Average per Term”
 * Lines to “Rolling Average”
