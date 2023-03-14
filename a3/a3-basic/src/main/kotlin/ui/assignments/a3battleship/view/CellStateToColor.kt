@@ -4,7 +4,7 @@ import javafx.scene.paint.Color
 import ui.assignments.a3battleship.model.CellState
 
 internal fun CellState.toColor(): Color {
-    return when(this) {
+    return when (this) {
         CellState.Ocean -> Color.DEEPSKYBLUE
         CellState.Attacked -> Color.LIGHTGRAY
         CellState.ShipHit -> Color.CORAL

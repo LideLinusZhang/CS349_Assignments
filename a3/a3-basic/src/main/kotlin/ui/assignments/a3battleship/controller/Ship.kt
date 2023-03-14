@@ -4,10 +4,11 @@ import javafx.animation.Interpolator
 import javafx.animation.RotateTransition
 import javafx.animation.TranslateTransition
 import javafx.event.EventHandler
+import javafx.geometry.Pos
 import javafx.geometry.VPos
-import javafx.scene.Group
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import javafx.scene.text.Text
@@ -17,7 +18,7 @@ import ui.assignments.a3battleship.model.Cell
 import ui.assignments.a3battleship.model.Orientation
 import ui.assignments.a3battleship.model.ShipType
 
-class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType) : Group() {
+class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType) : StackPane() {
     private var inMoving: Boolean = false
     private var orientation: Orientation = Orientation.Vertical
 
@@ -37,6 +38,9 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
 
     init {
         children.addAll(shape, text)
+        alignment = Pos.CENTER
+        prefHeight = height
+        prefWidth = width
 
         onMouseClicked = EventHandler {
             if (it.button == MouseButton.PRIMARY) {
@@ -57,7 +61,7 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         RotateTransition(Duration.seconds(1.0), this).apply {
             toAngle = if (orientation == Orientation.Vertical) {
                 orientation = Orientation.Horizontal
-                90.0
+                -90.0
             } else {
                 orientation = Orientation.Vertical
                 0.0
@@ -74,10 +78,13 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
     }
 
     private fun startMoving() {
+        if (shipId != Cell.NoShip)
+            playerBoard.removeBattleship(shipId)
+
         inMoving = true
         viewOrder -= 1000
 
-        val sceneCoordinate = localToScene(0.0, 0.0)
+        val sceneCoordinate = shape.localToScene(0.0, 0.0)
         moveInfo =
             MoveInfo((sceneCoordinate.x + 0.5 * width), (sceneCoordinate.y + 0.5 * height), translateX, translateY)
     }
@@ -86,18 +93,17 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         inMoving = false
         viewOrder += 1000
 
-        val sceneCoordinate = localToScene(0.0, 0.0)
+        val sceneCoordinate = shape.localToScene(0.0, 0.0)
 
-        if (playerBoard.isInBoard(sceneCoordinate.x, sceneCoordinate.y, width, height)) {
+        if (playerBoard.isInBoard(sceneCoordinate.x, sceneCoordinate.y)) {
             val result = if (orientation == Orientation.Vertical) {
                 val bowX = sceneCoordinate.x + 0.5 * width
 
                 playerBoard.placeBattleship(shipType, orientation, bowX, sceneCoordinate.y)
             } else {
-                val bowX = sceneCoordinate.x + height
-                val bowY = sceneCoordinate.y + 0.5 * width
+                val bowY = sceneCoordinate.y - 0.5 * width
 
-                playerBoard.placeBattleship(shipType, orientation, bowX, bowY)
+                playerBoard.placeBattleship(shipType, orientation, sceneCoordinate.x, bowY)
             }
 
             if (result.shipId != Cell.NoShip) {
@@ -106,8 +112,7 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
                 if (orientation == Orientation.Vertical) {
                     updateTranslation(result.normalizedLayoutX, result.normalizedLayoutY + 0.5 * height)
                 } else {
-                    layoutX = result.normalizedLayoutX - height
-                    layoutY = result.normalizedLayoutY - 0.5 * width
+                    updateTranslation(result.normalizedLayoutX + 0.5 * height, result.normalizedLayoutY)
                 }
 
                 return

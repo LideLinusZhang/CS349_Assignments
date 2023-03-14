@@ -16,6 +16,11 @@ data class Cell(val x: Int, val y: Int, var shipId: Int = NoShip, var wasAttacke
      * Returns a string representation of the [Cell].
      */
     override fun toString(): String {
-        return "($x,$y) ${if (shipId == NoShip) "--" else String.format("%02d", shipId)} ${if (wasAttacked) "Y" else "N"}"
+        return "($x,$y) ${
+            if (shipId == NoShip) "--" else String.format(
+                "%02d",
+                shipId
+            )
+        } ${if (wasAttacked) "Y" else "N"}"
     }
 }

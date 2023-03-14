@@ -11,7 +11,7 @@ enum class ShipType {
     Submarine;
 
     fun length(): Int {
-        return when(this) {
+        return when (this) {
             Destroyer -> 2
             Cruiser -> 3
             Submarine -> 3
@@ -21,7 +21,7 @@ enum class ShipType {
     }
 
     fun abbreviation(): String {
-        return when(this) {
+        return when (this) {
             Destroyer -> "DD"
             Cruiser -> "CC"
             Submarine -> "SB"

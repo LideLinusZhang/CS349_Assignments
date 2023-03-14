@@ -6,7 +6,7 @@ import kotlin.random.Random
 /**
  * A simple AI that plays Battleship.
  */
-class AI(var game : Game) {
+class AI(var game: Game) {
 
     init {
         game.gameStateProperty.addListener { _, _, newGameState ->
@@ -26,7 +26,9 @@ class AI(var game : Game) {
                     it,
                     Orientation.values()[Random.nextInt(0, Orientation.values().size)],
                     Random.nextInt(0, game.dimension),
-                    Random.nextInt(0, game.dimension)) == Cell.NoShip) ;
+                    Random.nextInt(0, game.dimension)
+                ) == Cell.NoShip
+            );
         }
         // signal that the AI has placed all its ships and is ready to start the game
         game.startGame()

@@ -1,4 +1,4 @@
-    package ui.assignments.a3battleship.model
+package ui.assignments.a3battleship.model
 
 import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.beans.property.ReadOnlyObjectWrapper
@@ -8,13 +8,13 @@ import javafx.beans.property.ReadOnlyObjectWrapper
  * @param dimension number of rows and columns on the board
  * @param debug if true, debug messages are printed to the command line
  */
-class Game (val dimension: Int, val debug: Boolean = false) {
+class Game(val dimension: Int, val debug: Boolean = false) {
 
     companion object {
         /**
          * A map between ship types and their length (in cells)
          */
-        val shipLength = mapOf (
+        val shipLength = mapOf(
             ShipType.Battleship to 4,
             ShipType.Carrier to 5,
             ShipType.Cruiser to 3,
@@ -26,7 +26,8 @@ class Game (val dimension: Int, val debug: Boolean = false) {
     // a map with the two game boards
     private val boards = mapOf(
         Player.Human to Board(dimension),
-        Player.Ai to Board(dimension))
+        Player.Ai to Board(dimension)
+    )
 
     // the currently active player, derived from [gameState]
     private val activePlayer
@@ -49,7 +50,7 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      * @param x: the x-coordinate of the attacked cell
      * @param y: the y-coordinate of the attacked cell
      */
-    fun attackCell(x: Int, y: Int)  {
+    fun attackCell(x: Int, y: Int) {
         // attacks cell
         boards[activePlayer.other()]!!.attackCell(x, y)
 
@@ -75,7 +76,7 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      * @param bowY the y-coordinate of the cell in which the bow of the ship is located
      * @return the shipId of the newly placed ship, or [Cell.NoShip] if the ship was not placed
      */
-    fun placeShip(shipType: ShipType, orientation: Orientation, bowX: Int, bowY: Int) : Int {
+    fun placeShip(shipType: ShipType, orientation: Orientation, bowX: Int, bowY: Int): Int {
         if ((gameState.value == GameState.HumanSetup) or (gameState.value == GameState.AiSetup)) {
             return boards[activePlayer]!!.placeShip(shipType, orientation, bowX, bowY)
         }
@@ -96,7 +97,7 @@ class Game (val dimension: Int, val debug: Boolean = false) {
     /**
      * Returns a list of all the ship that have to be placed.
      */
-    fun getShipsToPlace() : List<ShipType> {
+    fun getShipsToPlace(): List<ShipType> {
         // The returned list determines how many ships are in play. Traditionally, there is only one ship of each type.
         return listOf(
             ShipType.Battleship,
@@ -112,7 +113,7 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      * @param player the player whose number of ships is queried
      * @return the number of ships for the player
      */
-    fun getShipsPlacedCount(player: Player) : Int {
+    fun getShipsPlacedCount(player: Player): Int {
         return boards[player]!!.getPlacedShipCount()
     }
 
@@ -122,7 +123,7 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      * @param shipId the id of the ship queried
      * @return true if the ship was sunk, and false otherwise
      */
-    fun isSunk(player: Player, shipId: Int) : Boolean {
+    fun isSunk(player: Player, shipId: Int): Boolean {
         return boards[player]!!.isSunk(shipId)
     }
 
@@ -131,9 +132,18 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      */
     fun startGame() {
         when (gameState.value) {
-            GameState.Init -> { gameState.value = GameState.HumanSetup }
-            GameState.HumanSetup -> { gameState.value = GameState.AiSetup }
-            GameState.AiSetup -> { gameState.value = GameState.HumanAttack }
+            GameState.Init -> {
+                gameState.value = GameState.HumanSetup
+            }
+
+            GameState.HumanSetup -> {
+                gameState.value = GameState.AiSetup
+            }
+
+            GameState.AiSetup -> {
+                gameState.value = GameState.HumanAttack
+            }
+
             else -> {}
         }
     }
@@ -143,9 +153,14 @@ class Game (val dimension: Int, val debug: Boolean = false) {
      * @param player the player whose board is queried
      * @return a 2d-list of all cell states; first (outer) dimension represents the y-coordinate, second (inner) one the x-coordinate
      */
-    fun getBoard(player: Player) : List<List<CellState>> {
+    fun getBoard(player: Player): List<List<CellState>> {
         if (debug) {
-            println("$player's public board:\n${boards[player]!!.getBoardStates().fold("") { acc, cur -> "$acc${cur.fold("") { acc2, cur2 -> "$acc2\t$cur2" } }\n" }}\n$player's ")
+            println(
+                "$player's public board:\n${
+                    boards[player]!!.getBoardStates()
+                        .fold("") { acc, cur -> "$acc${cur.fold("") { acc2, cur2 -> "$acc2\t$cur2" }}\n" }
+                }\n$player's "
+            )
         }
 
         return boards[player]!!.getBoardStates(debug)

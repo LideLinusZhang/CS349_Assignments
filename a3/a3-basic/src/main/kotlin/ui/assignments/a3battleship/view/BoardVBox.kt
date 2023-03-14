@@ -5,7 +5,7 @@ import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
 import javafx.scene.text.Text
 
-class BoardVBox(text: String, board: Board): VBox(Text(text), board) {
+class BoardVBox(text: String, board: Board) : VBox(Text(text), board) {
     init {
         prefWidth = 300.0
         maxHeight = Double.MAX_VALUE

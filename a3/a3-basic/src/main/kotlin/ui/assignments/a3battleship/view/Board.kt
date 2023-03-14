@@ -16,8 +16,8 @@ abstract class Board(
     protected val player: Player
 ) : Canvas(size, size) {
     private val sizeWithoutMargin: Double = size - 2.0 * margin
-    protected val sceneX: Double get() = localToScene(0.0,0.0).x
-    protected val sceneY: Double get() = localToScene(0.0,0.0).y
+    protected val sceneX: Double get() = localToScene(0.0, 0.0).x
+    protected val sceneY: Double get() = localToScene(0.0, 0.0).y
     val gridSize: Double = sizeWithoutMargin / dimension
 
 
@@ -89,15 +89,9 @@ abstract class Board(
         paintYCoordinates()
     }
 
-    fun isInBoard(layoutX: Double, layoutY: Double, width: Double, height: Double): Boolean {
-        return isInBoard(layoutX, layoutY) && isInBoard(layoutX + width, layoutY) &&
-                isInBoard(layoutX, layoutY + height) &&
-                isInBoard(layoutX + width, layoutY + height)
-    }
-
-    private fun isInBoard(sceneX: Double, sceneY: Double): Boolean {
-        val min = localToScene (margin, margin )
-        val max = localToScene( width - margin, height - margin)
+    fun isInBoard(sceneX: Double, sceneY: Double): Boolean {
+        val min = localToScene(margin, margin)
+        val max = localToScene(width - margin, height - margin)
 
         return min.x < sceneX && sceneX < max.x && min.y < sceneY && sceneY < max.y
     }

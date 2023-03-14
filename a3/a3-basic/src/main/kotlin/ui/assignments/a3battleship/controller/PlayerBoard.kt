@@ -7,7 +7,7 @@ import ui.assignments.a3battleship.model.ShipType
 import ui.assignments.a3battleship.view.Board
 
 class PlayerBoard(game: Game) : Board(game = game, player = Player.Human) {
-    data class PlaceResult (
+    data class PlaceResult(
         val shipId: Int,
         val normalizedLayoutX: Double,
         val normalizedLayoutY: Double
@@ -24,9 +24,19 @@ class PlayerBoard(game: Game) : Board(game = game, player = Player.Human) {
 
         val shipId = game.placeShip(shipType, orientation, boardXCoordinate, boardYCoordinate)
 
-        val normalizedLayoutX = getCanvasCoordinate(boardXCoordinate) + gridSize * 0.5 + sceneX
-        val normalizedLayoutY = getCanvasCoordinate(boardYCoordinate) + gridSize * 0.5 + sceneY
+        val normalizedLayoutX = if (orientation == Orientation.Vertical)
+            getCanvasCoordinate(boardXCoordinate) + sceneX + 0.5 * gridSize
+        else
+            getCanvasCoordinate(boardXCoordinate) + sceneX
+        val normalizedLayoutY = if (orientation == Orientation.Vertical)
+            getCanvasCoordinate(boardYCoordinate) + sceneY
+        else
+            getCanvasCoordinate(boardYCoordinate) + sceneY + 0.5 * gridSize
+
+        game.getBoard(player)
 
         return PlaceResult(shipId, normalizedLayoutX, normalizedLayoutY)
     }
+
+    fun removeBattleship(shipId: Int) = game.removeShip(shipId)
 }

@@ -8,7 +8,7 @@ import ui.assignments.a3battleship.controller.PlayerBoard
 import ui.assignments.a3battleship.controller.Ship
 import ui.assignments.a3battleship.model.ShipType
 
-class Harbour(playerBoard: PlayerBoard): HBox() {
+class Harbour(playerBoard: PlayerBoard) : HBox() {
     init {
         ShipType.values().forEach {
             children.add(Ship(playerBoard, it))
