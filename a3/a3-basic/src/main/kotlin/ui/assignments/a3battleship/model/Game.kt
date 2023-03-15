@@ -2,6 +2,7 @@ package ui.assignments.a3battleship.model
 
 import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.beans.property.ReadOnlyObjectWrapper
+import ui.assignments.a3battleship.view.IView
 
 /**
  * Game manages the rules of the game Battleship.
@@ -45,6 +46,16 @@ class Game(val dimension: Int, val debug: Boolean = false) {
      */
     val gameStateProperty: ReadOnlyObjectProperty<GameState> = gameState.readOnlyProperty
 
+    private val registeredViews = mutableListOf<IView>()
+
+    fun registerViews(vararg views: IView) {
+        registeredViews.addAll(views)
+    }
+
+    private fun updateViews() {
+        registeredViews.forEach { it.update() }
+    }
+
     /**
      * Attacks a cell on the opposing player's board.
      * @param x: the x-coordinate of the attacked cell
@@ -66,6 +77,8 @@ class Game(val dimension: Int, val debug: Boolean = false) {
             // if no win, set state to next player's attack
             gameState.value = gameState.value.next()
         }
+
+        updateViews()
     }
 
     /**

@@ -8,9 +8,12 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import ui.assignments.a3battleship.controller.PlayerBoard
 import ui.assignments.a3battleship.controller.Ship
+import ui.assignments.a3battleship.model.Game
+import ui.assignments.a3battleship.model.GameState
+import ui.assignments.a3battleship.model.Player
 import ui.assignments.a3battleship.model.ShipType
 
-class Harbour(playerBoard: PlayerBoard) : HBox() {
+class Harbour(playerBoard: PlayerBoard, private val game: Game) : HBox(), IView {
     val allShipsPlacedProperty: BooleanBinding
     private val fleet = mutableListOf<Ship>()
 
@@ -37,5 +40,14 @@ class Harbour(playerBoard: PlayerBoard) : HBox() {
 
     fun disableShipMoving() {
         fleet.forEach { it.disableMoving() }
+    }
+
+    override fun update() {
+        if (game.gameStateProperty.value == GameState.HumanWon) {
+            fleet.forEach {
+                if (!game.isSunk(Player.Human, it.shipId))
+                    it.returnToHarbour()
+            }
+        }
     }
 }

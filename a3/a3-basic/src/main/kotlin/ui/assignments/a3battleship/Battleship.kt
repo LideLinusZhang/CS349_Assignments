@@ -7,7 +7,6 @@ import javafx.scene.Scene
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
 import javafx.scene.layout.VBox
-import javafx.scene.text.Text
 import javafx.stage.Stage
 import ui.assignments.a3battleship.controller.ExitGameButton
 import ui.assignments.a3battleship.controller.OpponentBoard
@@ -15,6 +14,7 @@ import ui.assignments.a3battleship.controller.PlayerBoard
 import ui.assignments.a3battleship.controller.StartGameButton
 import ui.assignments.a3battleship.model.Game
 import ui.assignments.a3battleship.view.BoardVBox
+import ui.assignments.a3battleship.view.GameStatusText
 import ui.assignments.a3battleship.view.Harbour
 
 class Battleship : Application() {
@@ -24,11 +24,15 @@ class Battleship : Application() {
         val computer = AI(game)
 
         val playerBoard = PlayerBoard(game)
-        val harbour = Harbour(playerBoard)
+        val opponentBoard = OpponentBoard(game)
+        val harbour = Harbour(playerBoard, game)
+        val gameStatusText = GameStatusText(game)
+        game.registerViews(playerBoard, opponentBoard, harbour)
 
         val playerVBox = BoardVBox("My Formation", playerBoard)
-        val opponentVBox = BoardVBox("Opponent’s Waters", OpponentBoard(game))
-        val centerVBox = VBox(Text("My Fleet"), harbour, StartGameButton(harbour, game), ExitGameButton()).apply {
+        val opponentVBox = BoardVBox("Opponent’s Waters", opponentBoard)
+
+        val centerVBox = VBox(gameStatusText, harbour, StartGameButton(harbour, game), ExitGameButton()).apply {
             prefWidth = 275.0
             prefHeight = 375.0
             alignment = Pos.TOP_CENTER

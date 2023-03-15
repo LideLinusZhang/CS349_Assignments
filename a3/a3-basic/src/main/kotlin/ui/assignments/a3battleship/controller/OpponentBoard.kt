@@ -14,11 +14,8 @@ class OpponentBoard(game: Game) : Board(game = game, player = Player.Ai) {
                 val boardXCoordinate = getBoardCoordinate(it.x)
                 val boardYCoordinate = getBoardCoordinate(it.y)
 
-                if (game.getBoard(player)[boardYCoordinate][boardXCoordinate] == CellState.Ocean) {
+                if (game.getBoard(player)[boardYCoordinate][boardXCoordinate] == CellState.Ocean)
                     game.attackCell(boardXCoordinate, boardYCoordinate)
-
-                    draw()
-                }
             }
         }
     }

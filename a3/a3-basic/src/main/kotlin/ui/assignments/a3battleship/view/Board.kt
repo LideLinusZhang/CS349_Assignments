@@ -14,7 +14,7 @@ abstract class Board(
     private val margin: Double = 25.0,
     protected val game: Game,
     protected val player: Player
-) : Canvas(size, size) {
+) : Canvas(size, size), IView {
     private val sizeWithoutMargin: Double = size - 2.0 * margin
     protected val sceneX: Double get() = localToScene(0.0, 0.0).x
     protected val sceneY: Double get() = localToScene(0.0, 0.0).y
@@ -94,5 +94,9 @@ abstract class Board(
         val max = localToScene(width - margin, height - margin)
 
         return min.x < sceneX && sceneX < max.x && min.y < sceneY && sceneY < max.y
+    }
+
+    override fun update() {
+        draw()
     }
 }

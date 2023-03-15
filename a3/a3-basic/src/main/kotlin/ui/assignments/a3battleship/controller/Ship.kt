@@ -38,7 +38,7 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
     }
 
     private val shipIdProperty = SimpleIntegerProperty(Cell.NoShip)
-    private var shipId: Int
+    var shipId: Int
         get() = shipIdProperty.value
         set(value) {
             shipIdProperty.value = value
@@ -134,10 +134,10 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
             }
         }
 
-        backToInitialPosition()
+        returnToHarbour()
     }
 
-    private fun backToInitialPosition() {
+    fun returnToHarbour() {
         TranslateTransition(Duration.seconds(1.0), this).apply {
             byX = -translateX
             byY = -translateY
