@@ -3,6 +3,9 @@ package ui.assignments.a3battleship.controller
 import javafx.animation.Interpolator
 import javafx.animation.RotateTransition
 import javafx.animation.TranslateTransition
+import javafx.beans.binding.Bindings
+import javafx.beans.binding.BooleanBinding
+import javafx.beans.property.SimpleIntegerProperty
 import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.geometry.VPos
@@ -34,7 +37,14 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         rotate = 90.0
     }
 
-    private var shipId: Int = Cell.NoShip
+    private val shipIdProperty = SimpleIntegerProperty(Cell.NoShip)
+    private var shipId: Int
+        get() = shipIdProperty.value
+        set(value) {
+            shipIdProperty.value = value
+        }
+
+    val shipPlacedProperty: BooleanBinding = Bindings.notEqual(Cell.NoShip, shipIdProperty)
 
     init {
         children.addAll(shape, text)
@@ -42,19 +52,22 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         prefHeight = height
         prefWidth = width
 
-        onMouseClicked = EventHandler {
-            if (it.button == MouseButton.PRIMARY) {
-                if (inMoving) endMoving()
-                else {
-                    startMoving()
-                    updateTranslation(it.sceneX, it.sceneY)
-                }
-            } else if (inMoving) rotate()
-        }
+        shape.onMouseClicked = EventHandler { handleMouseClick(it) }
+        text.onMouseClicked = EventHandler { handleMouseClick(it) }
 
         addEventFilter(MouseEvent.MOUSE_MOVED) {
             if (inMoving) updateTranslation(it.sceneX, it.sceneY)
         }
+    }
+
+    private fun handleMouseClick(mouseEvent: MouseEvent) {
+        if (mouseEvent.button == MouseButton.PRIMARY) {
+            if (inMoving) endMoving()
+            else {
+                startMoving()
+                updateTranslation(mouseEvent.sceneX, mouseEvent.sceneY)
+            }
+        } else if (inMoving) rotate()
     }
 
     private fun rotate() {
@@ -78,8 +91,10 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
     }
 
     private fun startMoving() {
-        if (shipId != Cell.NoShip)
+        if (shipId != Cell.NoShip) {
             playerBoard.removeBattleship(shipId)
+            shipId = Cell.NoShip
+        }
 
         inMoving = true
         viewOrder -= 1000
@@ -141,5 +156,9 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
                 cycleCount = 1
             }.play()
         }
+    }
+
+    fun disableMoving() {
+        onMouseClicked = null
     }
 }
