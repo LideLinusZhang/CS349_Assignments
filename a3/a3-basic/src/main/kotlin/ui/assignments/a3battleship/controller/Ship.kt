@@ -45,6 +45,7 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         }
 
     val shipPlacedProperty: BooleanBinding = Bindings.notEqual(Cell.NoShip, shipIdProperty)
+    var isMoveEnabled: Boolean = true
 
     init {
         children.addAll(shape, text)
@@ -61,13 +62,15 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
     }
 
     private fun handleMouseClick(mouseEvent: MouseEvent) {
-        if (mouseEvent.button == MouseButton.PRIMARY) {
-            if (inMoving) endMoving()
-            else {
-                startMoving()
-                updateTranslation(mouseEvent.sceneX, mouseEvent.sceneY)
-            }
-        } else if (inMoving) rotate()
+        if (isMoveEnabled) {
+            if (mouseEvent.button == MouseButton.PRIMARY) {
+                if (inMoving) endMoving()
+                else {
+                    startMoving()
+                    updateTranslation(mouseEvent.sceneX, mouseEvent.sceneY)
+                }
+            } else if (inMoving) rotate()
+        }
     }
 
     private fun rotate() {
@@ -112,23 +115,22 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
 
         if (playerBoard.isInBoard(sceneCoordinate.x, sceneCoordinate.y)) {
             val result = if (orientation == Orientation.Vertical) {
-                val bowX = sceneCoordinate.x + 0.5 * width
+                val bowSceneXCoordinate = sceneCoordinate.x + 0.5 * width
 
-                playerBoard.placeBattleship(shipType, orientation, bowX, sceneCoordinate.y)
+                playerBoard.placeBattleship(shipType, orientation, bowSceneXCoordinate, sceneCoordinate.y)
             } else {
-                val bowY = sceneCoordinate.y - 0.5 * width
+                val bowSceneYCoordinate = sceneCoordinate.y - 0.5 * width
 
-                playerBoard.placeBattleship(shipType, orientation, sceneCoordinate.x, bowY)
+                playerBoard.placeBattleship(shipType, orientation, sceneCoordinate.x, bowSceneYCoordinate)
             }
 
             if (result.shipId != Cell.NoShip) {
                 shipId = result.shipId
 
-                if (orientation == Orientation.Vertical) {
+                if (orientation == Orientation.Vertical)
                     updateTranslation(result.normalizedLayoutX, result.normalizedLayoutY + 0.5 * height)
-                } else {
+                else
                     updateTranslation(result.normalizedLayoutX + 0.5 * height, result.normalizedLayoutY)
-                }
 
                 return
             }
@@ -156,9 +158,5 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
                 cycleCount = 1
             }.play()
         }
-    }
-
-    fun disableMoving() {
-        onMouseClicked = null
     }
 }

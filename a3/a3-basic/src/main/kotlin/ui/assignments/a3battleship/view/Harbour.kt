@@ -15,13 +15,14 @@ import ui.assignments.a3battleship.model.ShipType
 
 class Harbour(playerBoard: PlayerBoard, private val game: Game) : HBox(), IView {
     val allShipsPlacedProperty: BooleanBinding
-    private val fleet = mutableListOf<Ship>()
+    val fleet: List<Ship>
 
     init {
         prefWidth = 275.0
         prefHeight = 300.0
         alignment = Pos.TOP_CENTER
 
+        fleet = mutableListOf()
         ShipType.values().forEach {
             val ship = Ship(playerBoard, it)
             children.add(ship)
@@ -36,10 +37,6 @@ class Harbour(playerBoard: PlayerBoard, private val game: Game) : HBox(), IView 
             setHgrow(it, Priority.NEVER)
             setMargin(it, Insets(10.0))
         }
-    }
-
-    fun disableShipMoving() {
-        fleet.forEach { it.disableMoving() }
     }
 
     override fun update() {

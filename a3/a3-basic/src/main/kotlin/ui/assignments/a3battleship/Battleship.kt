@@ -27,7 +27,7 @@ class Battleship : Application() {
         val opponentBoard = OpponentBoard(game)
         val harbour = Harbour(playerBoard, game)
         val gameStatusText = GameStatusText(game)
-        game.registerViews(playerBoard, opponentBoard, harbour)
+        game.registerViews(playerBoard, opponentBoard, harbour, gameStatusText)
 
         val playerVBox = BoardVBox("My Formation", playerBoard)
         val opponentVBox = BoardVBox("Opponent’s Waters", opponentBoard)

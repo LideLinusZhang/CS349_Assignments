@@ -19,7 +19,7 @@ class StartGameButton(harbour: Harbour, game: Game) : Button("Start Game") {
         )
 
         onAction = EventHandler {
-            harbour.disableShipMoving()
+            harbour.fleet.forEach { it.isMoveEnabled = false }
             game.startGame()
         }
     }

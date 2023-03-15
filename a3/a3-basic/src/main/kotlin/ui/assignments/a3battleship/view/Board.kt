@@ -83,10 +83,15 @@ abstract class Board(
         }
     }
 
-    fun draw() {
+    private fun draw() {
+        clearCanvas()
         paintGrids()
         paintXCoordinates()
         paintYCoordinates()
+    }
+
+    private fun clearCanvas() {
+        graphicsContext2D.clearRect(0.0, 0.0, width, height)
     }
 
     fun isInBoard(sceneX: Double, sceneY: Double): Boolean {
