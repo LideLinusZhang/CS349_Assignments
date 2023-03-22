@@ -103,8 +103,10 @@ class Ship(private val playerBoard: PlayerBoard, private val shipType: ShipType)
         viewOrder -= 1000
 
         val sceneCoordinate = shape.localToScene(0.0, 0.0)
-        moveInfo =
+        moveInfo = if (orientation == Orientation.Vertical)
             MoveInfo((sceneCoordinate.x + 0.5 * width), (sceneCoordinate.y + 0.5 * height), translateX, translateY)
+        else
+            MoveInfo((sceneCoordinate.x + 0.5 * height), (sceneCoordinate.y - 0.5 * width), translateX, translateY)
     }
 
     private fun endMoving() {
