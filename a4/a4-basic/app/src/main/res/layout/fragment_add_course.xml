@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".AddCourseFragment">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_margin="5dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/course_code"
+                    android:layout_width="@dimen/text_view_width"
+                    android:layout_height="match_parent" android:id="@+id/textViewCourseCode"
+                    android:textAlignment="viewStart"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextCourseCode"
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/description"
+                    android:layout_width="@dimen/text_view_width"
+                    android:layout_height="match_parent" android:id="@+id/textViewDescription"
+                    android:textAlignment="viewStart"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editTextDescription"
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:gravity="center_horizontal">
+            <TextView
+                    android:text="@string/mark"
+                    android:layout_width="@dimen/text_view_width"
+                    android:layout_height="match_parent" android:id="@+id/textViewMark"
+                    android:textAlignment="viewStart"/>
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/editTextNumberMark" android:layout_weight="1"/>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:text="@string/isWD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/switchWD" android:layout_weight="1"
+                    style="@style/Widget.AppCompat.CompoundButton.Switch"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:gravity="center_horizontal">
+            <TextView
+                    android:text="@string/term"
+                    android:layout_width="@dimen/text_view_width"
+                    android:layout_height="match_parent" android:id="@+id/textViewTerm"/>
+            <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spinner_height" android:id="@+id/spinnerTerm"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <Button
+                    android:text="@string/create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonCreate" android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.Button" android:layout_margin="5dp"/>
+            <Button
+                    android:text="@string/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonCancel" android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.Button" android:layout_margin="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

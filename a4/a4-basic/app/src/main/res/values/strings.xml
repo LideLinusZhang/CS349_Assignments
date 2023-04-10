@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Mobile Mark Management</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="create">Create</string>
+    <string name="course_code">Course Code</string>
+    <string name="description">Description</string>
+    <string name="mark">Mark</string>
+    <string name="isWD">WD\'ed</string>
+    <string name="term">Term</string>
+</resources>
