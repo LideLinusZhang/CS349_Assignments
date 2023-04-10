@@ -11,12 +11,8 @@ import com.example.mymobilemarkmanagement.models.Course
 class CourseDisplayViewModel : ViewModel() {
     private val courseDictionary = mutableMapOf<String, Course>()
 
-    private val sortOrder = MutableLiveData(SortOrder.ByCourseName).apply {
-        observeForever { updateCourses() }
-    }
-    private val filter = MutableLiveData(Filter.AllCourses).apply {
-        observeForever { updateCourses() }
-    }
+    private val sortOrder = MutableLiveData(SortOrder.ByCourseName)
+    private val filter = MutableLiveData(Filter.AllCourses)
     private val courses = MutableLiveData<List<Course>>()
 
     fun getCourses(): LiveData<List<Course>> = courses
@@ -24,11 +20,13 @@ class CourseDisplayViewModel : ViewModel() {
     fun getSortOrder(): LiveData<SortOrder> = sortOrder
     fun setSortOrder(order: SortOrder) {
         sortOrder.value = order
+        updateCourses()
     }
 
     fun getFilter(): LiveData<Filter> = filter
     fun setFilter(filter: Filter) {
         this.filter.value = filter
+        updateCourses()
     }
 
     fun addCourse(courseCode: String, description: String, mark: Int, term: Term): Boolean {
