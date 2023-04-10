@@ -23,10 +23,12 @@
                 app:layout_constraintTop_toTopOf="parent" android:id="@+id/linearLayout">
             <Spinner
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/sortOrderSpinner" android:layout_weight="1"/>
+                    android:layout_height="@dimen/spinner_height" android:id="@+id/sortOrderSpinner"
+                    android:layout_weight="1"/>
             <Spinner
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/filterSpinner" android:layout_weight="1"/>
+                    android:layout_height="@dimen/spinner_height" android:id="@+id/filterSpinner"
+                    android:layout_weight="1"/>
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:src="@android:drawable/ic_input_add"

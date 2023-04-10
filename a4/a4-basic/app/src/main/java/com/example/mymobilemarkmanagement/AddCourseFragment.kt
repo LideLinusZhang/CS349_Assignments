@@ -18,6 +18,8 @@ import com.example.mymobilemarkmanagement.viewModels.CourseDisplayViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class AddCourseFragment : Fragment() {
+    private var previousMark: Int? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +40,11 @@ class AddCourseFragment : Fragment() {
             val switchWD = findViewById<SwitchMaterial>(R.id.switchWD).apply {
                 setOnCheckedChangeListener { _, isChecked ->
                     editTextNumberMark.isEnabled = !isChecked
+                    if (isChecked) {
+                        previousMark = editTextNumberMark.text.toString().toIntOrNull()
+                        editTextNumberMark.text.clear()
+                    } else
+                        previousMark.toString().apply { editTextNumberMark.setText(toCharArray(), 0, length) }
                 }
             }
             val spinnerTerm = findViewById<Spinner>(R.id.spinnerTerm).apply {

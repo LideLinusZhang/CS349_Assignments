@@ -13,7 +13,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textAlignment="center" android:textStyle="bold" android:textSize="24sp"
-                android:id="@+id/textViewCourseCode"/>
+                android:id="@+id/textViewCourseCode" android:gravity="center"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -22,10 +22,10 @@
                     android:text="@string/description"
                     android:layout_width="@dimen/text_view_width"
                     android:layout_height="match_parent" android:id="@+id/textViewDescription"
-                    android:textAlignment="viewStart"/>
+                    android:gravity="center_vertical"/>
             <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/editTextDescription"
@@ -39,10 +39,10 @@
                     android:text="@string/mark"
                     android:layout_width="@dimen/text_view_width"
                     android:layout_height="match_parent" android:id="@+id/textViewMark"
-                    android:textAlignment="viewStart"/>
+                    android:gravity="center_vertical"/>
             <EditText
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/edit_text_height"
                     android:inputType="number"
                     android:ems="10"
                     android:id="@+id/editTextNumberMark" android:layout_weight="1"/>
@@ -59,7 +59,8 @@
             <TextView
                     android:text="@string/term"
                     android:layout_width="@dimen/text_view_width"
-                    android:layout_height="match_parent" android:id="@+id/textViewTerm"/>
+                    android:layout_height="match_parent" android:id="@+id/textViewTerm"
+                    android:gravity="center_vertical"/>
             <Spinner
                     android:layout_width="0dp"
                     android:layout_height="@dimen/spinner_height" android:id="@+id/spinnerTerm"
