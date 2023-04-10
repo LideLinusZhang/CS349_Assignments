@@ -39,6 +39,7 @@ class CourseDisplayFragment : Fragment() {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         vm.setSortOrder(SortOrder.values()[position])
                     }
+
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
             }
@@ -53,6 +54,7 @@ class CourseDisplayFragment : Fragment() {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         vm.setFilter(Filter.values()[position])
                     }
+
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
                 }
             }

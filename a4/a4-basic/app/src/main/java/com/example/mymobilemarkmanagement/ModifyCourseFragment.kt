@@ -50,6 +50,18 @@ class ModifyCourseFragment : Fragment() {
             }
             val switchWD = findViewById<SwitchMaterial>(R.id.switchWD).apply {
                 isChecked = (course.mark.value == Course.WDMark)
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        editTextNumberMark.apply {
+                            text = ""
+                            isEnabled = false
+                        }
+                    } else {
+                        isEnabled = false
+                        if (course.mark.value != Course.WDMark)
+                            text = course.mark.value.toString()
+                    }
+                }
             }
             val spinnerTerm = findViewById<Spinner>(R.id.spinnerTerm).apply {
                 adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Term.values())
