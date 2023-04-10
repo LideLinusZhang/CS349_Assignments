@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:clickable="true" app:srcCompat="@android:drawable/ic_menu_edit"
             android:id="@+id/floatingActionButtonModify" android:layout_margin="10dp"
-            app:backgroundTint="@color/material_dynamic_primary70" app:fabSize="mini"
+            app:backgroundTint="@android:color/holo_blue_light" app:fabSize="mini"
             app:backgroundTintMode="add"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

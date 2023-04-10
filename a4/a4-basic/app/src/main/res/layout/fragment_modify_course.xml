@@ -41,7 +41,7 @@
                     android:layout_height="match_parent" android:id="@+id/textViewMark"
                     android:textAlignment="viewStart"/>
             <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:ems="10"
@@ -49,7 +49,7 @@
             <com.google.android.material.switchmaterial.SwitchMaterial
                     android:text="@string/isWD"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/switchWD" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/switchWD"
                     android:clickable="false"/>
         </LinearLayout>
         <LinearLayout
