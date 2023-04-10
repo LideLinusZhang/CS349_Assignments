@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:layout_height="@dimen/course_item_height"
+              android:layout_marginStart="@dimen/course_item_margin"
+              android:layout_marginEnd="@dimen/course_item_margin" android:orientation="horizontal"
+              android:id="@+id/itemBackground">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:layout_weight="2">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textViewItemCourseCode"
+                    android:textStyle="bold" android:layout_marginEnd="20dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textViewItemMark"
+                    android:layout_marginEnd="10dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textViewItemTerm"/>
+        </LinearLayout>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textViewItemDescription"
+                android:textStyle="italic"
+        />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_edit"
+            android:id="@+id/floatingActionButtonModify" android:layout_margin="10dp"
+            app:backgroundTint="@color/material_dynamic_primary70" app:fabSize="mini"
+            app:backgroundTintMode="add"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" app:srcCompat="@android:drawable/ic_menu_delete"
+            android:id="@+id/floatingActionButtonDelete" android:layout_margin="10dp"
+            app:backgroundTint="@android:color/holo_red_dark" app:fabSize="mini" app:backgroundTintMode="add"/>
+</LinearLayout>

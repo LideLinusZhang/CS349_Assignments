@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
@@ -45,28 +46,29 @@ class ModifyCourseFragment : Fragment() {
             }
             val editTextNumberMark = findViewById<TextView>(R.id.editTextNumberMark).apply {
                 if (course.mark.value != Course.WDMark)
-                    text = course.mark.toString()
+                    text = course.mark.value.toString()
             }
             val switchWD = findViewById<SwitchMaterial>(R.id.switchWD).apply {
-                isEnabled = (course.mark.value == Course.WDMark)
+                isChecked = (course.mark.value == Course.WDMark)
             }
             val spinnerTerm = findViewById<Spinner>(R.id.spinnerTerm).apply {
-                id = course.term.value!!.ordinal
+                adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Term.values())
+                setSelection(course.term.value!!.ordinal)
             }
 
             findViewById<Button>(R.id.buttonCancel).setOnClickListener {
-                findNavController().navigate(R.id.action_addCourseFragment_to_courseDisplayFragment)
+                findNavController().navigate(R.id.action_modifyCourseFragment_to_courseDisplayFragment)
             }
 
             findViewById<Button>(R.id.buttonSubmit).setOnClickListener {
                 val description = editTextDescription.text.toString()
                 val isWD = switchWD.isChecked
                 val mark: Int? = if (isWD) Course.WDMark else editTextNumberMark.text.toString().toIntOrNull()
-                val term: Term = Term.values()[spinnerTerm.id]
+                val term: Term = Term.values()[spinnerTerm.selectedItemPosition]
 
                 if (mark != null) {
                     vm.updateCourse(courseCode!!, description, mark, term)
-                    findNavController().navigate(R.id.action_addCourseFragment_to_courseDisplayFragment)
+                    findNavController().navigate(R.id.action_modifyCourseFragment_to_courseDisplayFragment)
                 }
             }
         }

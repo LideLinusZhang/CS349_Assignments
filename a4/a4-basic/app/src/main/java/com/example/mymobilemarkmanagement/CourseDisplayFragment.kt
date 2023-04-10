@@ -10,7 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mymobilemarkmanagement.enums.Filter
 import com.example.mymobilemarkmanagement.enums.SortOrder
 import com.example.mymobilemarkmanagement.viewModels.CourseDisplayViewModel
@@ -57,6 +60,14 @@ class CourseDisplayFragment : Fragment() {
             val addCourseButton = findViewById<FloatingActionButton>(R.id.addCourseButton)
             addCourseButton.setOnClickListener {
                 findNavController().navigate(R.id.action_courseDisplayFragment_to_addCourseFragment)
+            }
+
+            val recyclerViewCourseList = findViewById<RecyclerView>(R.id.recyclerViewCourseList).apply {
+                adapter = CourseAdapter(listOf(), vm, this@CourseDisplayFragment.findNavController())
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+            vm.getCourses().observe(viewLifecycleOwner) {
+                (recyclerViewCourseList.adapter as CourseAdapter).update(it)
             }
         }
 

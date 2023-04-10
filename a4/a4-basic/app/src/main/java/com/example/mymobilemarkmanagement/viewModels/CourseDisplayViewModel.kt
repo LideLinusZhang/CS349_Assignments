@@ -8,12 +8,18 @@ import com.example.mymobilemarkmanagement.enums.SortOrder
 import com.example.mymobilemarkmanagement.enums.Term
 import com.example.mymobilemarkmanagement.models.Course
 
-class CourseDisplayViewModel: ViewModel() {
+class CourseDisplayViewModel : ViewModel() {
     private val courseDictionary = mutableMapOf<String, Course>()
 
-    private val sortOrder = MutableLiveData(SortOrder.ByCourseName)
-    private val filter = MutableLiveData(Filter.AllCourses)
+    private val sortOrder = MutableLiveData(SortOrder.ByCourseName).apply {
+        observeForever { updateCourses() }
+    }
+    private val filter = MutableLiveData(Filter.AllCourses).apply {
+        observeForever { updateCourses() }
+    }
     private val courses = MutableLiveData<List<Course>>()
+
+    fun getCourses(): LiveData<List<Course>> = courses
 
     fun getSortOrder(): LiveData<SortOrder> = sortOrder
     fun setSortOrder(order: SortOrder) {
@@ -26,8 +32,8 @@ class CourseDisplayViewModel: ViewModel() {
     }
 
     fun addCourse(courseCode: String, description: String, mark: Int, term: Term): Boolean {
-        return if (!courseDictionary.containsKey(courseCode)) {
-            courseDictionary[courseCode] = Course(description, mark, term)
+        return if (!courseDictionary.containsKey(courseCode.uppercase())) {
+            courseDictionary[courseCode] = Course(courseCode.uppercase(), description, mark, term)
             updateCourses()
             true
         } else false
@@ -50,6 +56,24 @@ class CourseDisplayViewModel: ViewModel() {
     }
 
     private fun updateCourses() {
+        courses.value = courseDictionary.filterKeys {
+            val isCS = it.startsWith("CS")
+            val isMath = it.startsWith("MATH", true) ||
+                    it.startsWith("CO", true) ||
+                    it.startsWith("STAT", true)
 
+            when (filter.value!!) {
+                Filter.AllCourses -> true
+                Filter.CSOnly -> isCS
+                Filter.MathOnly -> isMath
+                Filter.OtherOnly -> !(isCS || isMath)
+            }
+        }.values.run {
+            when (sortOrder.value!!) {
+                SortOrder.ByCourseName -> sortedBy { it.code }
+                SortOrder.ByMark -> sortedByDescending { it.mark.value }
+                SortOrder.ByTerm -> sortedBy { it.term.value }
+            }
+        }
     }
 }

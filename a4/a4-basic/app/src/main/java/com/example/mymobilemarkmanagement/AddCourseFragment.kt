@@ -42,6 +42,7 @@ class AddCourseFragment : Fragment() {
             }
             val spinnerTerm = findViewById<Spinner>(R.id.spinnerTerm).apply {
                 adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Term.values())
+                setSelection(0)
             }
 
             findViewById<Button>(R.id.buttonCancel).setOnClickListener {
@@ -53,7 +54,7 @@ class AddCourseFragment : Fragment() {
                 val description = editTextDescription.text.toString()
                 val isWD = switchWD.isChecked
                 val mark: Int? = if (isWD) Course.WDMark else editTextNumberMark.text.toString().toIntOrNull()
-                val term = Term.values()[spinnerTerm.id]
+                val term = Term.values()[spinnerTerm.selectedItemPosition]
 
                 if (courseCode.isNotEmpty() && mark != null && vm.addCourse(courseCode, description, mark, term))
                     findNavController().navigate(R.id.action_addCourseFragment_to_courseDisplayFragment)
